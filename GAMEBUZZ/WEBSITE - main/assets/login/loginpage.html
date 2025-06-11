@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Sign Up</title>
+  <link rel="stylesheet" href="loginpage.css" />
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-box" id="form-box">
+      <h2 id="form-title">Login</h2>
+      <form id="auth-form">
+        <input type="text" placeholder="Username" required />
+        <input type="password" placeholder="Password" required />
+        <input type="email" placeholder="Email" id="email-field" class="hidden" required />
+        <buttontype="submit">Submit</button> 
+      </form>
+      <p id="toggle-text">
+        Don't have an account? <a href="#" id="toggle-link">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const toggleLink = document.getElementById("toggle-link");
+    const formTitle = document.getElementById("form-title");
+    const toggleText = document.getElementById("toggle-text");
+    const emailField = document.getElementById("email-field");
+
+    let isLogin = true;
+
+    toggleLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      isLogin = !isLogin;
+      formTitle.textContent = isLogin ? "Login" : "Sign Up";
+      toggleText.innerHTML = isLogin
+        ? `Don't have an account? <a href="#" id="toggle-link">Sign up</a>`
+        : `Already have an account? <a href="#" id="toggle-link">Login</a>`;
+      emailField.classList.toggle("hidden");
+      // Re-bind toggle after replacing innerHTML
+      document.getElementById("toggle-link").addEventListener("click", toggleLink.click);
+    });
+  </script>
+</body>
+</html>
